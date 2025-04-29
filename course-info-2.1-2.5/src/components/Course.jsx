@@ -7,9 +7,9 @@ const Course = ({ course }) => {
   return (
     <div>
       <Header course={course.name} />
-      {course.parts.map((part, i) => {
+      {course.parts.map((part) => {
         return (
-          <div key={i}>
+          <div key={part.id}>
             <Content part={part} />
           </div>
         );
