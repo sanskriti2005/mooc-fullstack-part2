@@ -16,16 +16,19 @@ function App() {
       {
         name: 'State of a component',
         exercises: 14
+      },
+      {
+        name: 'Redux',
+        exercises: 11
       }
     ]
   }
-  let totalExercises = 0;
 
   return (
     <>
       
       <Course course={course} />
-      {/* <Total exercises={totalExercises} /> */}
+      
     </>
   );
 }
