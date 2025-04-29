@@ -1,6 +1,5 @@
-import Content from "./components/Content";
-import Header from "./components/Header";
-import Total from "./components/Total";
+import Course from "./components/Course";
+
 
 function App() {
   const course = {
@@ -24,17 +23,9 @@ function App() {
 
   return (
     <>
-      <Header course={course.name} />
-      {course.parts.map((part) => {
-        totalExercises += part.exercises;
-        return (
-          <>
-            <Content part={part} />
-          </>
-        );
-      })}
-
-      <Total exercises={totalExercises} />
+      
+      <Course course={course} />
+      {/* <Total exercises={totalExercises} /> */}
     </>
   );
 }
