@@ -1,23 +1,35 @@
 import { useState } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+const App = () => {
+  const [persons, setPersons] = useState([
+    { id: 0, name: 'Arto Hellas' }
+  ]) 
+  const [newName, setNewName] = useState('')
+
+
+  const addNumber = (e) => {
+    e.preventDefault();
+    let personObj = {id: persons.length + 1, name: newName};
+    setPersons(persons.concat(personObj));
+    setNewName('')
+  }
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h2>Phonebook</h2>
+      <form onSubmit={(e) => addNumber(e)}>
+        <div>
+          name: <input value={newName} onChange={(e) => setNewName(e.target.value)}/>
+        </div>
+        <div>
+          <button type="submit">add</button>
+        </div>
+      </form>
+      <h2>Numbers</h2>
+      {
+        persons.map((person) => <p key={person.id}>{person.name}</p>)
+      }
+    </div>
   )
 }
 
