@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Numbers from "./components/Numbers";
+import Phonebook from "./components/Phonebook";
+import AddNew from "./components/AddNew";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,70 +14,27 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
 
-  const addNumber = (e) => {
-    e.preventDefault();
-
-    let ifPerson = persons.find((person) => person.name == newName);
-
-    if (!ifPerson) {
-      let personObj = {
-        id: persons.length + 1,
-        name: newName,
-        number: newNumber,
-      };
-      setPersons(persons.concat(personObj));
-    } else {
-      alert(`${newName} is already added to the phonebook`);
-    }
-    setNewName("");
-    setNewNumber("");
-  };
-
-  const filterNumbers = (value) => {
-    let filteredNumbers = filteredPersos.filter((person) =>
-      person.name.includes(value)
-    );
-    value == ""
-      ? setFilteredPersons(persons)
-      : setFilteredPersons(filteredNumbers);
-  };
   return (
     <div>
-      <div>
-        <h2>Phonebook</h2>
-        <input onChange={(e) => filterNumbers(e.target.value)} />
-      </div>
+      <Phonebook
+        persons={persons}
+        filteredPersos={filteredPersos}
+        setFilteredPersons={setFilteredPersons}
+      />
       <div>
         <h2>add new</h2>
-        <form onSubmit={(e) => addNumber(e)}>
-          <div>
-            name:{" "}
-            <input
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-            />
-          </div>
-          <div>
-            number:
-            <input
-              value={newNumber}
-              onChange={(e) => setNewNumber(e.target.value)}
-            />
-          </div>
-          <div>
-            <button type="submit">add</button>
-          </div>
-        </form>
+        <AddNew
+          newName={newName}
+          setNewName={setNewName}
+          newNumber={newNumber}
+          setNewNumber={setNewNumber}
+          persons={persons}
+          setFilteredPersons={setFilteredPersons}
+          setPersons={setPersons}
+        />
       </div>
       <div>
-        <h2>Numbers</h2>
-        {filteredPersos.map((person) => (
-          <div key={person.id}>
-            <p>
-              {person.name}: {person.number}
-            </p>
-          </div>
-        ))}
+        <Numbers persons={filteredPersos} />
       </div>
     </div>
   );
