@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Numbers from "./components/Numbers";
 import Phonebook from "./components/Phonebook";
 import AddNew from "./components/AddNew";
+import axios from 'axios'
+
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -13,6 +15,12 @@ const App = () => {
   const [filteredPersos, setFilteredPersons] = useState(persons);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons")
+    .then((response) => response.data )
+    .then((data) => console.log(data))
+  }, [])
 
   return (
     <div>
